@@ -15,22 +15,32 @@ interface Category {
   icon: string;
 }
 
-interface TransactionCardProps {
-  data: {
-    type: "positive" | "negative";
-    title: string;
-    amount: string;
-    category: Category;
-    date: string;
-  };
+export interface TransactionCardProps {
+  type: "positive" | "negative";
+  title: string;
+  amount: string;
+  category: Category;
+  date: string;
 }
 
-export const TransactionCard = ({ data }: TransactionCardProps) => {
+interface Props {
+  data: TransactionCardProps;
+}
+
+export const moneyMask = (value: string | number) => {
+  var tmp = value + "";
+  tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+  if (tmp.length > 6) tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+  return tmp;
+};
+
+export const TransactionCard = ({ data }: Props) => {
   return (
     <Container>
       <Title>{data.title}</Title>
       <Amount type={data.type}>
-        {data.type === "negative" ? "- " : ""}R$ {data.amount}
+        {data.type === "negative" ? "- " : ""}R$ {moneyMask(data.amount)}
       </Amount>
 
       <Footer>

@@ -1,4 +1,5 @@
 import React from "react";
+import { moneyMask } from "../TransactionCard";
 import {
   Container,
   Header,
@@ -29,7 +30,7 @@ export const HighlightCard = ({
         <Icon name={icon} type={title} />
       </Header>
       <Footer>
-        <Amount type={title}>R$ {amount}</Amount>
+        <Amount type={title}>R$ {moneyMask(amount)}</Amount>
         <LastTrasaction type={title}>{lastTransaction}</LastTrasaction>
       </Footer>
     </Container>

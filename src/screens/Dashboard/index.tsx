@@ -1,8 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { getBottomSpace } from "react-native-iphone-x-helper";
+
 import { HighlightCard } from "../../Components/HighlightCard";
-import { TransactionCard } from "../../Components/TransactionCard";
+import {
+  TransactionCard,
+  TransactionCardProps,
+} from "../../Components/TransactionCard";
 
 import {
   Container,
@@ -20,9 +23,14 @@ import {
   TransactionList,
 } from "./styles";
 
+interface DataListProps extends TransactionCardProps {
+  id: number;
+}
+
 export function Dashboard() {
-  const data = [
+  const data: DataListProps[] = [
     {
+      id: 1,
       type: "positive",
       title: "Desenvolvimento de site",
       amount: "20000",
@@ -33,22 +41,24 @@ export function Dashboard() {
       date: "13/04/2020",
     },
     {
+      id: 2,
       type: "negative",
-      title: "Desenvolvimento de site",
-      amount: "20000",
+      title: "Hamburgueria Pyzzy",
+      amount: "5900",
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: "Alimentação",
+        icon: "coffee",
       },
       date: "13/04/2020",
     },
     {
-      type: "positive",
-      title: "Desenvolvimento de site",
-      amount: "20000",
+      id: 3,
+      type: "negative",
+      title: "Aluguel de apartamento",
+      amount: "1200",
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: "Casa",
+        icon: "shopping-bag",
       },
       date: "13/04/2020",
     },
@@ -76,21 +86,21 @@ export function Dashboard() {
         <HighlightCard
           title="Entradas"
           icon="arrow-up-circle"
-          amount="17000"
+          amount="170000"
           lastTransaction="Última entrada 21 de maio"
         />
 
         <HighlightCard
           title="Saída"
           icon="arrow-down-circle"
-          amount="17000"
+          amount="170000"
           lastTransaction="21 de maio"
         />
 
         <HighlightCard
           title="Total"
           icon="dollar-sign"
-          amount="17000"
+          amount="1700000"
           lastTransaction="21 de maio"
         />
       </HighlightCards>
@@ -102,8 +112,7 @@ export function Dashboard() {
           renderItem={({ item }: any) => {
             return <TransactionCard data={item} />;
           }}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: getBottomSpace() }}
+          keyExtractor={(item: any) => item.id}
         />
       </Transactions>
     </Container>
