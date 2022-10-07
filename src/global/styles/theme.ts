@@ -16,6 +16,7 @@ export default {
     title: "#363f5f",
 
     text: "#969cb2",
+    text_dark: "#000",
 
     background: "#f0f2f5",
   },
@@ -23,6 +24,6 @@ export default {
   fonts: {
     regular: "Poppins_400Regular",
     medium: "Poppins_500Medium",
-    bold: "",
+    bold: "Poppins_700Bold",
   },
 };
